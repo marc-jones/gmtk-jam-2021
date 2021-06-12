@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/man/front_leg.svg" type="Texture" id=1]
+[ext_resource path="res://assets/man/body.svg" type="Texture" id=2]
+[ext_resource path="res://assets/man/back_leg.svg" type="Texture" id=3]
+[ext_resource path="res://assets/man/arm.svg" type="Texture" id=4]
+[ext_resource path="res://scripts/Person.gd" type="Script" id=5]
+[ext_resource path="res://nodes/AttachPoint.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "falling"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FrontArm:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BackArm:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 45.0, -315.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BackLeg:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FrontLeg:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.0161685, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 0.0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.5715
+height = 28.6353
+
+[node name="Person" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 5 )
+
+[node name="BackArm" type="Sprite" parent="."]
+position = Vector2( -6.11412, -1.49541 )
+rotation = -1.88201
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+offset = Vector2( 42, 3 )
+
+[node name="BackLeg" type="Sprite" parent="."]
+position = Vector2( 14.8859, 4.50459 )
+rotation = -0.222284
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+offset = Vector2( 63, -53 )
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 0.625, -0.1908 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="FrontLeg" type="Sprite" parent="."]
+position = Vector2( 15.8859, 4.50459 )
+rotation = 0.220963
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+offset = Vector2( 30, 35 )
+
+[node name="FrontArm" type="Sprite" parent="."]
+position = Vector2( -6.11412, -0.495411 )
+rotation = 2.66741
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+offset = Vector2( 42, 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "falling"
+anims/falling = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.0332603, -0.256817 )
+rotation = -1.32478
+shape = SubResource( 2 )
+
+[node name="AttachPoint" parent="." instance=ExtResource( 6 )]
