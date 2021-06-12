@@ -20,30 +20,3 @@ func _draw():
 
 func _process(_delta):
 	update()
-	if display_attach_points:
-		update_display_attach_points()
-
-func start_display_attach_points():
-	display_attach_points = true
-	for child in get_tree().get_nodes_in_group("attach_points"):
-		var attach_overlay = attach_packaged.instance()
-		attach_overlay.set_position(child.get_global_position())
-		$AttachPoints.add_child(attach_overlay)
-
-func update_display_attach_points():
-	var attach_points = get_tree().get_nodes_in_group("attach_points")
-	var attach_overlays = $AttachPoints.get_children()
-	while len(attach_points) < len(attach_overlays):
-		$AttachPoints.remove_child(attach_overlays[0])
-		attach_overlays[0].queue_free()
-	while len(attach_points) > len(attach_overlays):
-		var attach_overlay = attach_packaged.instance()
-		$AttachPoints.add_child(attach_overlay)
-	attach_overlays = $AttachPoints.get_children()
-	for idx in range(len(attach_points)):
-		attach_overlays[idx].set_position(attach_points[idx].get_global_position())
-
-func end_display_attach_points():
-	display_attach_points = false
-	for child in $AttachPoints.get_children():
-		child.queue_free()

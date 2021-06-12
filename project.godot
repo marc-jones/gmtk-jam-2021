@@ -14,6 +14,10 @@ config/name="Gmtk- 2021"
 run/main_scene="res://nodes/PlayScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://nodes/Global.tscn"
+
 [display]
 
 window/size/width=360

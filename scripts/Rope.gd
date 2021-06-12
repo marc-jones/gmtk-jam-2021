@@ -70,7 +70,7 @@ func create_segments():
 			(rope_segment_height*idx + rope_segment_height*0.5) *
 			start_position.direction_to(end_position))
 		segment.set_rotation(angle)
-		segment.set_mass(0.1)
+		segment.set_mass(0.2)
 		$Bodies.add_child(segment)
 		if not previous_segment == null:
 			var joint = PinJoint2D.new()

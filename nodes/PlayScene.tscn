@@ -1,11 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/PlayScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/background.svg" type="Texture" id=2]
-[ext_resource path="res://assets/window.svg" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/PoetsenOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://nodes/Gargoyle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://nodes/Person.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/Overlay.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Windows.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 456, 28 )
 
 [node name="PlayScene" type="Node2D"]
 position = Vector2( 1, -4 )
@@ -20,166 +33,47 @@ texture = ExtResource( 2 )
 position = Vector2( 180, 333 )
 
 [node name="Windows" type="Node2D" parent="."]
+script = ExtResource( 7 )
 
-[node name="Window" type="Sprite" parent="Windows"]
-position = Vector2( 305, 100 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+[node name="HUD" type="Node2D" parent="."]
 
-[node name="Window2" type="Sprite" parent="Windows"]
-position = Vector2( 242, 100 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+[node name="Points" type="Label" parent="HUD"]
+margin_left = 17.0
+margin_top = 58.0
+margin_right = 95.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.94902, 0.941176, 0.898039, 1 )
+text = "Points:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Window3" type="Sprite" parent="Windows"]
-position = Vector2( 179, 100 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window4" type="Sprite" parent="Windows"]
-position = Vector2( 116, 100 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window5" type="Sprite" parent="Windows"]
-position = Vector2( 53, 100 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window6" type="Sprite" parent="Windows"]
-position = Vector2( 305.25, 182.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window7" type="Sprite" parent="Windows"]
-position = Vector2( 242.25, 182.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window8" type="Sprite" parent="Windows"]
-position = Vector2( 179.25, 182.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window9" type="Sprite" parent="Windows"]
-position = Vector2( 116.25, 182.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window10" type="Sprite" parent="Windows"]
-position = Vector2( 53.25, 182.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window11" type="Sprite" parent="Windows"]
-position = Vector2( 304.25, 266.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window12" type="Sprite" parent="Windows"]
-position = Vector2( 241.25, 266.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window13" type="Sprite" parent="Windows"]
-position = Vector2( 178.25, 266.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window14" type="Sprite" parent="Windows"]
-position = Vector2( 115.25, 266.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window15" type="Sprite" parent="Windows"]
-position = Vector2( 52.25, 266.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window16" type="Sprite" parent="Windows"]
-position = Vector2( 305, 428.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window17" type="Sprite" parent="Windows"]
-position = Vector2( 242, 428.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window18" type="Sprite" parent="Windows"]
-position = Vector2( 179, 428.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window19" type="Sprite" parent="Windows"]
-position = Vector2( 116, 428.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window20" type="Sprite" parent="Windows"]
-position = Vector2( 53, 428.75 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window21" type="Sprite" parent="Windows"]
-position = Vector2( 305.25, 511.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window22" type="Sprite" parent="Windows"]
-position = Vector2( 242.25, 511.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window23" type="Sprite" parent="Windows"]
-position = Vector2( 179.25, 511.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window24" type="Sprite" parent="Windows"]
-position = Vector2( 116.25, 511.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window25" type="Sprite" parent="Windows"]
-position = Vector2( 53.25, 511.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window26" type="Sprite" parent="Windows"]
-position = Vector2( 304.25, 595.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window27" type="Sprite" parent="Windows"]
-position = Vector2( 241.25, 595.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window28" type="Sprite" parent="Windows"]
-position = Vector2( 178.25, 595.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window29" type="Sprite" parent="Windows"]
-position = Vector2( 115.25, 595.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Window30" type="Sprite" parent="Windows"]
-position = Vector2( 52.25, 595.5 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+[node name="Number" type="Label" parent="HUD"]
+margin_left = 101.0
+margin_top = 46.0
+margin_right = 341.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.94902, 0.941176, 0.898039, 1 )
+text = "0000000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Entities" type="Node2D" parent="."]
-
-[node name="Person" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 288, 108 )
-
-[node name="Person2" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 59, 80 )
 
 [node name="Overlay" type="Node2D" parent="."]
 script = ExtResource( 6 )
 
 [node name="AttachPoints" type="Node2D" parent="Overlay"]
+
+[node name="PeopleCatcher" type="Area2D" parent="."]
+position = Vector2( 180, 754 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PeopleCatcher"]
+shape = SubResource( 3 )
+
+[node name="PersonTimer" type="Timer" parent="."]
