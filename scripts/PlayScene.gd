@@ -3,6 +3,7 @@ extends Node2D
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
 var points_text_packed = preload("res://nodes/PointsText.tscn")
+var exposition_packed = preload("res://nodes/Exposition.tscn")
 onready var overlay = get_node("Overlay")
 
 var mouse_pressed = false
@@ -25,8 +26,7 @@ onready var global = get_tree().get_root().get_node("Global")
 
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
-	setup_timer()
-	spawn_person()
+	add_exposition()
 
 func _input(event):
 	if event is InputEventScreenTouch:
@@ -100,6 +100,19 @@ func spawn_person():
 	$PersonTimer.wait_time = rand_range(min_person_wait, max_person_wait)
 	$PersonTimer.start()
 
+func spawn_starting_people():
+	var viewport_rect = get_viewport_rect()
+	# left
+	var person = person_packed.instance()
+	person.connect("person_saved", self, "register_points", [person_saved_score])
+	person.set_position(Vector2(viewport_rect.size.x/6, min_person_y_offset))
+	$Entities.add_child(person)
+	# right
+	person = person_packed.instance()
+	person.connect("person_saved", self, "register_points", [person_saved_score])
+	person.set_position(Vector2(5*viewport_rect.size.x/6, min_person_y_offset))
+	$Entities.add_child(person)
+
 func register_points(location, amount):
 	add_points_indicator(location, amount)
 	$HUD.record_points(amount)
@@ -115,3 +128,13 @@ func add_points_indicator(location, amount):
 	points_text.set_text(text, col)
 	points_text.set_position(location)
 	$Overlay.add_child(points_text)
+
+func add_exposition():
+	var exposition = exposition_packed.instance()
+	exposition.connect("exposition_done", self, "exposition_over")
+	add_child(exposition)
+
+func exposition_over():
+	$Exposition.queue_free()
+	setup_timer()
+	spawn_starting_people()
