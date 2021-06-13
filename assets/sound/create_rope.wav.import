@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/create_rope.wav-9c9a360d6a3f9a37f5799d2ceb030233.sample"
+
+[deps]
+
+source_file="res://assets/sound/create_rope.wav"
+dest_files=[ "res://.import/create_rope.wav-9c9a360d6a3f9a37f5799d2ceb030233.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

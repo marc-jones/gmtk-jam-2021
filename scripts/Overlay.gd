@@ -1,6 +1,7 @@
 extends Node2D
 
 var pressed_attach_point
+var hovering_attach_point
 var drag_position
 var joined_bool = false
 var display_attach_points = false

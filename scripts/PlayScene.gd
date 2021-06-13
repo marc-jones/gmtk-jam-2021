@@ -1,5 +1,8 @@
 extends Node2D
 
+# Disable exposition for faster development
+var debug = false
+
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
 var points_text_packed = preload("res://nodes/PointsText.tscn")
@@ -23,10 +26,14 @@ var person_saved_score = 1000
 var person_death_score = -500
 
 onready var global = get_tree().get_root().get_node("Global")
+onready var audio = get_tree().get_root().get_node("Audio")
 
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
-	add_exposition()
+	if debug:
+		exposition_over()
+	else:
+		add_exposition()
 
 func _input(event):
 	if event is InputEventScreenTouch:
@@ -34,6 +41,7 @@ func _input(event):
 			mouse_pressed = true
 			for attach_point in get_tree().get_nodes_in_group("attach_points"):
 				if attach_point.has_point(event.position):
+					audio.play_sound("start_rope")
 					overlay.pressed_attach_point = attach_point
 					global.display_attach_overlay = true
 		else:
@@ -48,6 +56,7 @@ func _input(event):
 				global.display_attach_overlay = false
 
 func create_rope(start_attach_point, end_attach_point):
+	audio.play_sound("create_rope")
 	if has_node("Rope"):
 		var old_rope = get_node("Rope")
 		remove_child(old_rope)
@@ -62,7 +71,14 @@ func _process(delta):
 		overlay.drag_position = mouse_pos
 		overlay.joined_bool = false
 		for attach_point in get_tree().get_nodes_in_group("attach_points"):
-			if attach_point.has_point(mouse_pos):
+			var hovering = attach_point.has_point(mouse_pos)
+			if attach_point == overlay.hovering_attach_point and not hovering:
+				overlay.hovering_attach_point = null
+			if hovering:
+				if (not attach_point == overlay.pressed_attach_point and
+					not attach_point == overlay.hovering_attach_point):
+					audio.play_sound("end_rope")
+					overlay.hovering_attach_point = attach_point
 				overlay.drag_position = attach_point.get_global_position()
 				overlay.joined_bool = true
 
@@ -135,6 +151,7 @@ func add_exposition():
 	add_child(exposition)
 
 func exposition_over():
-	$Exposition.queue_free()
+	if has_node("Exposition"):
+		$Exposition.queue_free()
 	setup_timer()
 	spawn_starting_people()

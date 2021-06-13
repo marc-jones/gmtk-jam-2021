@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/85415__timbre__remix-74874-oymaldonado-funk-guitar5-repaired-looped-reverbed.wav-9b9fcf7a53ed187464cba95af9a1a676.sample"
+
+[deps]
+
+source_file="res://assets/sound/85415__timbre__remix-74874-oymaldonado-funk-guitar5-repaired-looped-reverbed.wav"
+dest_files=[ "res://.import/85415__timbre__remix-74874-oymaldonado-funk-guitar5-repaired-looped-reverbed.wav-9b9fcf7a53ed187464cba95af9a1a676.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

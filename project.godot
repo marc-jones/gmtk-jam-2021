@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://nodes/Global.tscn"
+Audio="*res://nodes/Audio.tscn"
 
 [display]
 

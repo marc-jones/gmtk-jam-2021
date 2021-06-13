@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/your-call-by-kevin-macleod-from-filmmusic-io.mp3-308f6bb5bd622d57435b00d1b0333aa8.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/your-call-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/your-call-by-kevin-macleod-from-filmmusic-io.mp3-308f6bb5bd622d57435b00d1b0333aa8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
