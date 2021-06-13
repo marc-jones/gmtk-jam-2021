@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/PlayScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/background.svg" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/PoetsenOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://nodes/Gargoyle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Overlay.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Windows.gd" type="Script" id=7]
 
@@ -16,6 +17,62 @@ font_data = ExtResource( 3 )
 size = 36
 use_filter = true
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "negative"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Number:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.183011, 5.46448, 1 ),
+"update": 0,
+"values": [ Color( 0.94902, 0.941176, 0.898039, 1 ), Color( 0.705882, 0.321569, 0.321569, 1 ), Color( 0.94902, 0.941176, 0.898039, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Number:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.183, 5.46448, 1 ),
+"update": 0,
+"values": [ Vector2( 101, 46 ), Vector2( 101, 52 ), Vector2( 101, 46 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "positive"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Number:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.183011, 5.46448, 1 ),
+"update": 0,
+"values": [ Color( 0.94902, 0.941176, 0.898039, 1 ), Color( 0.541176, 0.690196, 0.376471, 1 ), Color( 0.94902, 0.941176, 0.898039, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Number:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.183, 5.46448, 1 ),
+"update": 0,
+"values": [ Vector2( 101, 46 ), Vector2( 101, 40 ), Vector2( 101, 46 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 456, 28 )
@@ -36,6 +93,7 @@ position = Vector2( 180, 333 )
 script = ExtResource( 7 )
 
 [node name="HUD" type="Node2D" parent="."]
+script = ExtResource( 5 )
 
 [node name="Points" type="Label" parent="HUD"]
 margin_left = 17.0
@@ -53,7 +111,7 @@ __meta__ = {
 margin_left = 101.0
 margin_top = 46.0
 margin_right = 341.0
-margin_bottom = 90.0
+margin_bottom = 90.0001
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.94902, 0.941176, 0.898039, 1 )
 text = "0000000000"
@@ -61,12 +119,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+anims/negative = SubResource( 6 )
+anims/positive = SubResource( 5 )
+
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Overlay" type="Node2D" parent="."]
 script = ExtResource( 6 )
-
-[node name="AttachPoints" type="Node2D" parent="Overlay"]
 
 [node name="PeopleCatcher" type="Area2D" parent="."]
 position = Vector2( 180, 754 )
@@ -77,3 +137,5 @@ collision_mask = 2
 shape = SubResource( 3 )
 
 [node name="PersonTimer" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]

@@ -26,6 +26,7 @@ onready var global = get_tree().get_root().get_node("Global")
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
 	setup_timer()
+	spawn_person()
 
 func _input(event):
 	if event is InputEventScreenTouch:
@@ -101,6 +102,7 @@ func spawn_person():
 
 func register_points(location, amount):
 	add_points_indicator(location, amount)
+	$HUD.record_points(amount)
 
 func add_points_indicator(location, amount):
 	var points_text = points_text_packed.instance()
