@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/PlayScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/background.svg" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Overlay.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Windows.gd" type="Script" id=7]
+[ext_resource path="res://assets/sound/saved.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -18,7 +19,7 @@ size = 36
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "negative"
 length = 0.2
 tracks/0/type = "value"
@@ -46,7 +47,7 @@ tracks/1/keys = {
 "values": [ Vector2( 101, 46 ), Vector2( 101, 52 ), Vector2( 101, 46 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "positive"
 length = 0.2
 tracks/0/type = "value"
@@ -74,8 +75,11 @@ tracks/1/keys = {
 "values": [ Vector2( 101, 46 ), Vector2( 101, 40 ), Vector2( 101, 46 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 456, 28 )
+
+[sub_resource type="AudioStreamRandomPitch" id=6]
+audio_stream = ExtResource( 8 )
 
 [node name="PlayScene" type="Node2D"]
 position = Vector2( 1, -4 )
@@ -120,8 +124,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
-anims/negative = SubResource( 6 )
-anims/positive = SubResource( 5 )
+anims/negative = SubResource( 3 )
+anims/positive = SubResource( 4 )
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -134,8 +138,11 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PeopleCatcher"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="PersonTimer" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 6 )

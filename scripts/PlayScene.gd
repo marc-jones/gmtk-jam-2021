@@ -1,7 +1,7 @@
 extends Node2D
 
 # Disable exposition for faster development
-var debug = false
+var debug = true
 
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
@@ -83,6 +83,7 @@ func _process(delta):
 				overlay.joined_bool = true
 
 func person_off_screen(body):
+	audio.play_sound("falling")
 	var text_pos = body.get_position()
 	var viewport_size = get_viewport_rect().size
 	text_pos.y = viewport_size.y

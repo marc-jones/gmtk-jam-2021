@@ -4,6 +4,8 @@ signal person_saved
 
 var max_speed = 80
 
+onready var audio = get_tree().get_root().get_node("Audio")
+
 func _ready():
 	pass # Replace with function body.
 
@@ -15,6 +17,7 @@ func over_window(shrink_location):
 	# AttachPoint presence and absense is being used to determine whether this
 	# character has been registered for deletion
 	if has_node("AttachPoint"):
+		audio.play_sound("saved")
 		emit_signal("person_saved", get_position())
 		$AttachPoint.queue_free()
 		$Tween.interpolate_property(self, "position", get_position(),
