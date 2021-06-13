@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/CreditsScene.gd" type="Script" id=1]
+[ext_resource path="res://assets/background.svg" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/PoetsenOne-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://nodes/Gargoyle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://nodes/ButtonTheme.tres" type="Theme" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 62
+outline_size = 4
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 4
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 4
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="CreditsScene" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 180, 320 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="Title" type="Label" parent="."]
+margin_top = 30.0
+margin_right = 360.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+custom_colors/font_outline_modulate = Color( 0.811765, 0.541176, 0.796078, 1 )
+text = "Credits"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 144.0
+margin_right = 336.0
+margin_bottom = 266.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+custom_colors/font_outline_modulate = Color( 0.811765, 0.541176, 0.796078, 1 )
+text = "Game design, programming, and art by Marc
+
+Many thanks to Jemima for useful design discussions"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text2" type="Label" parent="."]
+margin_left = 30.0
+margin_top = 384.0
+margin_right = 336.0
+margin_bottom = 558.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+custom_colors/font_outline_modulate = Color( 0.811765, 0.541176, 0.796078, 1 )
+text = "Poetsen One font by Rodrigo Fuenzalida
+CC-29 colour palette by Alpha6
+Your Call by Kevin MacLeod
+
+Full credits at:
+github.com/marc-jones/gmtk-jam-2021"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gargoyle" parent="." instance=ExtResource( 4 )]
+position = Vector2( 180, 330 )
+
+[node name="Rows" type="VBoxContainer" parent="."]
+margin_left = 49.0
+margin_top = 564.0
+margin_right = 312.0
+margin_bottom = 613.0
+theme = ExtResource( 8 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="Rows"]
+margin_right = 263.0
+margin_bottom = 49.0
+text = "Menu"

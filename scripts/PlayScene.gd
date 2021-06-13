@@ -1,7 +1,7 @@
 extends Node2D
 
 # Disable exposition for faster development
-var debug = true
+var debug = false
 
 var global_time = 30
 
@@ -58,7 +58,6 @@ func begin():
 		exposition_over()
 	else:
 		add_exposition()
-	$GlobalTimer.start()
 
 func _input(event):
 	if event is InputEventScreenTouch and not $GameEnd.visible:
@@ -185,6 +184,7 @@ func exposition_over():
 		$Exposition.queue_free()
 	setup_timer()
 	spawn_starting_people()
+	$GlobalTimer.start()
 
 func connect_buttons():
 	$GameEnd/Rows/Menu.connect("pressed", self, "return_to_menu")
