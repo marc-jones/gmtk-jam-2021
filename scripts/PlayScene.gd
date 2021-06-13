@@ -3,10 +3,11 @@ extends Node2D
 # Disable exposition for faster development
 var debug = false
 
-var global_time = 30
+var global_time = 5*60
 
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
+var umbrella_packed = preload("res://nodes/Umbrella.tscn")
 var points_text_packed = preload("res://nodes/PointsText.tscn")
 var exposition_packed = preload("res://nodes/Exposition.tscn")
 onready var overlay = get_node("Overlay")
@@ -15,11 +16,15 @@ var mouse_pressed = false
 
 var min_person_wait = 5.0
 var max_person_wait = 10.0
-
 var min_person_y_offset = -50
 var max_person_y_offset = -150
-
 var person_x_margin = 10
+
+var max_umbrella_number = 1
+var min_umbrella_wait = 5.0
+var max_umbrella_wait = 10.0
+var umbrella_x_margin = 30
+var umbrella_y_offset = 20
 
 var neg_col = "#b45252"
 var pos_col = "#8ab060"
@@ -32,6 +37,7 @@ onready var audio = get_tree().get_root().get_node("Audio")
 
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
+	$UmbrellaCatcher.connect("body_entered", self, "umbrella_off_screen")
 	setup_global_timer()
 	connect_buttons()
 
@@ -45,6 +51,7 @@ func update_global_timer():
 	
 func game_end():
 	$PersonTimer.stop()
+	$UmbrellaTimer.stop()
 	$GlobalTimer.stop()
 	$GameEnd/Rows/Text.text = "You scored " + str($HUD.points) + " points!"
 	$GameEnd.scale = Vector2.ZERO
@@ -118,10 +125,16 @@ func person_off_screen(body):
 		register_points(text_pos, person_death_score)
 		body.queue_free()
 
+func umbrella_off_screen(body):
+	body.queue_free()
+
 func setup_timer():
 	$PersonTimer.wait_time = rand_range(min_person_wait, max_person_wait)
 	$PersonTimer.connect("timeout", self, "spawn_person")
 	$PersonTimer.start()
+	$UmbrellaTimer.wait_time = rand_range(min_person_wait, max_person_wait)
+	$UmbrellaTimer.connect("timeout", self, "spawn_umbrella")
+	$UmbrellaTimer.start()
 
 func spawn_person():
 	var viewport_rect = get_viewport_rect()
@@ -143,6 +156,31 @@ func spawn_person():
 	$Entities.add_child(person)
 	$PersonTimer.wait_time = rand_range(min_person_wait, max_person_wait)
 	$PersonTimer.start()
+
+func spawn_umbrella():
+	var umbrellas = get_tree().get_nodes_in_group("umbrella")
+	if len(umbrellas) < max_umbrella_number:
+		var viewport_rect = get_viewport_rect()
+		var umbrella = umbrella_packed.instance()
+		var possible_positions = [
+			Vector2(
+				rand_range(
+					umbrella_x_margin,
+					viewport_rect.size.x/2-umbrella_x_margin),
+				viewport_rect.size.y + umbrella_y_offset
+			),
+			Vector2(
+				rand_range(
+					viewport_rect.size.x/2+umbrella_x_margin,
+					viewport_rect.size.x-umbrella_x_margin),
+				viewport_rect.size.y + umbrella_y_offset
+			)
+		]
+		possible_positions.shuffle()
+		umbrella.set_position(possible_positions[0])
+		$Entities.add_child(umbrella)
+		$UmbrellaTimer.wait_time = rand_range(min_umbrella_wait, max_umbrella_wait)
+		$UmbrellaTimer.start()
 
 func spawn_starting_people():
 	var viewport_rect = get_viewport_rect()

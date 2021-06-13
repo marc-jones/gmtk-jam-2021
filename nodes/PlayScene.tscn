@@ -166,7 +166,32 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PeopleCatcher"]
 shape = SubResource( 5 )
 
+[node name="UmbrellaCatcher" type="Area2D" parent="."]
+position = Vector2( 180, 754 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="Top" type="CollisionShape2D" parent="UmbrellaCatcher"]
+position = Vector2( 0, -862 )
+shape = SubResource( 5 )
+
+[node name="Bottom" type="CollisionShape2D" parent="UmbrellaCatcher"]
+position = Vector2( 0, 2 )
+shape = SubResource( 5 )
+
+[node name="Left" type="CollisionShape2D" parent="UmbrellaCatcher"]
+position = Vector2( -306, -418 )
+rotation = -1.57079
+shape = SubResource( 5 )
+
+[node name="Right" type="CollisionShape2D" parent="UmbrellaCatcher"]
+position = Vector2( 306, -418 )
+rotation = -1.57079
+shape = SubResource( 5 )
+
 [node name="PersonTimer" type="Timer" parent="."]
+
+[node name="UmbrellaTimer" type="Timer" parent="."]
 
 [node name="GlobalTimer" type="Timer" parent="."]
 

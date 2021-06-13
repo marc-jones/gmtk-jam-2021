@@ -7,7 +7,7 @@ var max_speed = 80
 onready var audio = get_tree().get_root().get_node("Audio")
 
 func _ready():
-	pass # Replace with function body.
+	add_to_group("person")
 
 func _integrate_forces(state):
 	if state.linear_velocity.length() > max_speed:

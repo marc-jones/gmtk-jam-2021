@@ -10,4 +10,5 @@ func open():
 	$Area2D.connect("body_entered", self, "body_enter")
 
 func body_enter(body):
-	body.over_window(get_position())
+	if body.is_in_group("person"):
+		body.over_window(get_position())
