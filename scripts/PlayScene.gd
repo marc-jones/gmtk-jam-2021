@@ -87,14 +87,16 @@ func _input(event):
 				global.display_attach_overlay = false
 
 func create_rope(start_attach_point, end_attach_point):
-	audio.play_sound("create_rope")
-	if $Entities.has_node("Rope"):
-		var old_rope = $Entities.get_node("Rope")
-		$Entities.remove_child(old_rope)
-		old_rope.queue_free()
-	var rope = rope_packed.instance()
-	rope.init(start_attach_point, end_attach_point)
-	$Entities.add_child(rope)
+	if (is_instance_valid(start_attach_point) and
+		is_instance_valid(end_attach_point)):
+		audio.play_sound("create_rope")
+		if $Entities.has_node("Rope"):
+			var old_rope = $Entities.get_node("Rope")
+			$Entities.remove_child(old_rope)
+			old_rope.queue_free()
+		var rope = rope_packed.instance()
+		rope.init(start_attach_point, end_attach_point)
+		$Entities.add_child(rope)
 
 func _process(delta):
 	if not $GlobalTimer.is_stopped():
@@ -110,7 +112,8 @@ func _process(delta):
 			if hovering:
 				if (not attach_point == overlay.pressed_attach_point and
 					not attach_point == overlay.hovering_attach_point):
-					audio.play_sound("end_rope")
+					if not audio.is_sound_playing("end_rope"):
+						audio.play_sound("end_rope")
 					overlay.hovering_attach_point = attach_point
 				overlay.drag_position = attach_point.get_global_position()
 				overlay.joined_bool = true

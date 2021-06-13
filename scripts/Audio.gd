@@ -34,3 +34,8 @@ func _ready():
 func play_sound(sound_str):
 	if sound_str in stream_library:
 		stream_library[sound_str].play()
+
+func is_sound_playing(sound_str):
+	if sound_str in stream_library:
+		return(stream_library[sound_str].is_playing())
+	return(false)
