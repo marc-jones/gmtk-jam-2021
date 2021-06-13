@@ -1,7 +1,7 @@
 extends Node2D
 
 # Disable exposition for faster development
-var debug = true
+var debug = false
 
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
@@ -30,6 +30,8 @@ onready var audio = get_tree().get_root().get_node("Audio")
 
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
+
+func begin():
 	if debug:
 		exposition_over()
 	else:

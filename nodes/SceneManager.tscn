@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/fonts/PoetsenOne-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/SceneManager.gd" type="Script" id=2]
+[ext_resource path="res://assets/menubackground.svg" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+outline_size = 4
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.929412, 0.878431, 0.870588, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.847059, 0.627451, 0.835294, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.811765, 0.541176, 0.796078, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.87451, 0.666667, 0.647059, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.811765, 0.458824, 0.792157, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id=4]
+Button/colors/font_color = Color( 0.811765, 0.541176, 0.796078, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.847059, 0.627451, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.811765, 0.458824, 0.792157, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 5 )
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = SubResource( 7 )
+Button/styles/pressed = SubResource( 8 )
+
+[node name="SceneManager" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Menu" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite" parent="Menu"]
+position = Vector2( 180, 320 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="1" type="Node2D" parent="Menu"]
+position = Vector2( 180, 222 )
+
+[node name="Text" type="Label" parent="Menu/1"]
+margin_left = -157.0
+margin_top = -173.0
+margin_right = 154.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+custom_colors/font_outline_modulate = Color( 0.811765, 0.541176, 0.796078, 1 )
+text = "Raining
+men!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="Menu"]
+margin_left = 84.0
+margin_top = 432.0
+margin_right = 288.0
+margin_bottom = 582.0
+theme = SubResource( 4 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="Menu/Buttons"]
+margin_right = 204.0
+margin_bottom = 65.0
+size_flags_vertical = 3
+text = "Play"
+
+[node name="Credits" type="Button" parent="Menu/Buttons"]
+margin_top = 85.0
+margin_right = 204.0
+margin_bottom = 150.0
+size_flags_vertical = 3
+text = "Credits"
+
+[node name="Tween" type="Tween" parent="."]

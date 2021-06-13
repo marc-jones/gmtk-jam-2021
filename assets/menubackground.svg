@@ -13,7 +13,7 @@
    version="1.1"
    id="svg2711"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="background.svg">
+   sodipodi:docname="menubackground.svg">
   <defs
      id="defs2705" />
   <sodipodi:namedview
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="1414.9421"
-     inkscape:cy="1175.3672"
+     inkscape:zoom="22.4"
+     inkscape:cx="1447.4233"
+     inkscape:cy="-9.0736095"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -64,40 +64,5 @@
        height="677.33331"
        x="-501.27975"
        y="218.99408" />
-    <rect
-       style="fill:#f2f0e5;fill-opacity:1;stroke:none;stroke-width:4.99999;stroke-linecap:square;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="rect861-3-2"
-       width="381"
-       height="619.79309"
-       x="-501.27975"
-       y="276.5343" />
-    <rect
-       style="fill:#868188;fill-opacity:1;stroke:none;stroke-width:4.99999;stroke-linecap:square;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="rect878-6-70"
-       width="381"
-       height="9.6100559"
-       x="-501.27975"
-       y="325.13257" />
-    <rect
-       style="fill:#646365;fill-opacity:1;stroke:none;stroke-width:4.99999;stroke-linecap:square;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="rect878-9"
-       width="381"
-       height="74.249046"
-       x="-501.27975"
-       y="250.88351" />
-    <rect
-       style="fill:#868188;fill-opacity:1;stroke:none;stroke-width:4.99999;stroke-linecap:square;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="rect878-6-7-3"
-       width="381"
-       height="9.6100559"
-       x="-501.27975"
-       y="613.29602" />
-    <rect
-       style="fill:#646365;fill-opacity:1;stroke:none;stroke-width:4.99999;stroke-linecap:square;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-       id="rect878-4-6"
-       width="381"
-       height="17.160818"
-       x="-501.27975"
-       y="597.25525" />
   </g>
 </svg>
