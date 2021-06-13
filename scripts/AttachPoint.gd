@@ -1,6 +1,6 @@
 extends Node2D
 
-var radius = 30.0
+var radius = 50.0
 
 var radius_squared = radius*radius
 

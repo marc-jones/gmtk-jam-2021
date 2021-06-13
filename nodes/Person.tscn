@@ -66,7 +66,7 @@ height = 28.6353
 [node name="Person" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
-mass = 5.0
+mass = 8.0
 script = ExtResource( 5 )
 
 [node name="BackArm" type="Sprite" parent="."]
