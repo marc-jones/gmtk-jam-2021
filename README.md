@@ -1,5 +1,10 @@
-# GMTK Jam 2021
+# Raining Men! - GMTK Jam 2021
 
+Made in 48 hours for the GMTK Jam 2021, which had the theme "Joined Together".
+
+Join things together with ropes to save as many falling men as possible!
+
+Godot version v3.3.2.stable.official
 
 ## Credits
 
@@ -11,5 +16,5 @@ Your Call by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/5018-your-call
 License: https://filmmusic.io/standard-license
 
-Funk guitar and Timbre on freesound: https://freesound.org/people/Timbre/sounds/85415
+Funk guitar by Timbre on freesound: https://freesound.org/people/Timbre/sounds/85415
 
