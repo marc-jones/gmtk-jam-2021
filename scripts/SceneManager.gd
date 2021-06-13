@@ -40,7 +40,6 @@ func start_credits():
 	$Tween.interpolate_property(credits_scene, "position",
 		credits_scene.get_position(), Vector2(0.0, 0.0),
 		tween_duration, tween_curve, tween_ease)
-	$Tween.connect("tween_all_completed", credits_scene, "begin", [], CONNECT_ONESHOT)
 	$Tween.start()
 
 func return_to_menu(other_scene):
