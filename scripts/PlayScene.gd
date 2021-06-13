@@ -1,7 +1,9 @@
 extends Node2D
 
 # Disable exposition for faster development
-var debug = false
+var debug = true
+
+var global_time = 30
 
 var rope_packed = preload("res://nodes/Rope.tscn")
 var person_packed = preload("res://nodes/Person.tscn")
@@ -30,15 +32,36 @@ onready var audio = get_tree().get_root().get_node("Audio")
 
 func _ready():
 	$PeopleCatcher.connect("body_entered", self, "person_off_screen")
+	setup_global_timer()
+	connect_buttons()
+
+func setup_global_timer():
+	$GlobalTimer.set_wait_time(global_time)
+	$HUD.update_timer(global_time)
+	$GlobalTimer.connect("timeout", self, "game_end")
+
+func update_global_timer():
+	$HUD.update_timer($GlobalTimer.time_left)
+	
+func game_end():
+	$PersonTimer.stop()
+	$GlobalTimer.stop()
+	$GameEnd/Rows/Text.text = "You scored " + str($HUD.points) + " points!"
+	$GameEnd.scale = Vector2.ZERO
+	$GameEnd.show()
+	$Tween.interpolate_property($GameEnd, "scale", Vector2.ZERO, Vector2.ONE,
+		0.6, Tween.TRANS_BACK, Tween.EASE_OUT)
+	$Tween.start()
 
 func begin():
 	if debug:
 		exposition_over()
 	else:
 		add_exposition()
+	$GlobalTimer.start()
 
 func _input(event):
-	if event is InputEventScreenTouch:
+	if event is InputEventScreenTouch and not $GameEnd.visible:
 		if event.pressed:
 			mouse_pressed = true
 			for attach_point in get_tree().get_nodes_in_group("attach_points"):
@@ -59,15 +82,17 @@ func _input(event):
 
 func create_rope(start_attach_point, end_attach_point):
 	audio.play_sound("create_rope")
-	if has_node("Rope"):
-		var old_rope = get_node("Rope")
-		remove_child(old_rope)
+	if $Entities.has_node("Rope"):
+		var old_rope = $Entities.get_node("Rope")
+		$Entities.remove_child(old_rope)
 		old_rope.queue_free()
 	var rope = rope_packed.instance()
 	rope.init(start_attach_point, end_attach_point)
-	add_child(rope)
+	$Entities.add_child(rope)
 
 func _process(delta):
+	if not $GlobalTimer.is_stopped():
+		update_global_timer()
 	if not overlay.pressed_attach_point == null:
 		var mouse_pos = get_viewport().get_mouse_position()
 		overlay.drag_position = mouse_pos
@@ -85,13 +110,14 @@ func _process(delta):
 				overlay.joined_bool = true
 
 func person_off_screen(body):
-	audio.play_sound("falling")
-	var text_pos = body.get_position()
-	var viewport_size = get_viewport_rect().size
-	text_pos.y = viewport_size.y
-	text_pos.x = clamp(text_pos.x, person_x_margin, viewport_size.x-person_x_margin)
-	register_points(text_pos, person_death_score)
-	body.queue_free()
+	if not $GameEnd.visible:
+		audio.play_sound("falling")
+		var text_pos = body.get_position()
+		var viewport_size = get_viewport_rect().size
+		text_pos.y = viewport_size.y
+		text_pos.x = clamp(text_pos.x, person_x_margin, viewport_size.x-person_x_margin)
+		register_points(text_pos, person_death_score)
+		body.queue_free()
 
 func setup_timer():
 	$PersonTimer.wait_time = rand_range(min_person_wait, max_person_wait)
@@ -133,8 +159,9 @@ func spawn_starting_people():
 	$Entities.add_child(person)
 
 func register_points(location, amount):
-	add_points_indicator(location, amount)
-	$HUD.record_points(amount)
+	if not $GameEnd.visible:
+		add_points_indicator(location, amount)
+		$HUD.record_points(amount)
 
 func add_points_indicator(location, amount):
 	var points_text = points_text_packed.instance()
@@ -158,3 +185,17 @@ func exposition_over():
 		$Exposition.queue_free()
 	setup_timer()
 	spawn_starting_people()
+
+func connect_buttons():
+	$GameEnd/Rows/Menu.connect("pressed", self, "return_to_menu")
+	$GameEnd/Rows/Tweet.connect("pressed", self, "tweet")
+
+func return_to_menu():
+	$Entities.hide()
+	get_parent().return_to_menu(self)
+
+func tweet():
+	var _return = OS.shell_open("http://twitter.com/share?text=" +
+		"I scored " + str($HUD.points) + " in Raining Men!&url=" +
+		"https://manicmoleman.itch.io/raining-men" +
+		"&hashtags=gmtkjam,GodotEngine")

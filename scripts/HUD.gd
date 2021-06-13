@@ -12,3 +12,8 @@ func record_points(amount):
 		$AnimationPlayer.play("negative")
 	else:
 		$AnimationPlayer.play("positive")
+
+func update_timer(time_left):
+	var minutes = "%02d" % (int(time_left) / 60)
+	var seconds = "%02d" % (int(time_left) % 60)
+	$Clock.text = minutes + ':' + seconds

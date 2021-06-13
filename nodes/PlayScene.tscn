@@ -7,7 +7,7 @@
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Overlay.gd" type="Script" id=6]
 [ext_resource path="res://scripts/Windows.gd" type="Script" id=7]
-[ext_resource path="res://assets/sound/saved.wav" type="AudioStream" id=8]
+[ext_resource path="res://nodes/ButtonTheme.tres" type="Theme" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -78,8 +78,11 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 456, 28 )
 
-[sub_resource type="AudioStreamRandomPitch" id=6]
-audio_stream = ExtResource( 8 )
+[sub_resource type="DynamicFont" id=6]
+size = 62
+outline_size = 4
+use_filter = true
+font_data = ExtResource( 3 )
 
 [node name="PlayScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -122,7 +125,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Points2" type="Label" parent="HUD"]
+[node name="Time" type="Label" parent="HUD"]
 margin_left = 18.0
 margin_top = 36.0
 margin_right = 96.0
@@ -134,7 +137,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Number2" type="Label" parent="HUD"]
+[node name="Clock" type="Label" parent="HUD"]
 margin_left = 102.0
 margin_top = 24.0
 margin_right = 342.0
@@ -165,7 +168,47 @@ shape = SubResource( 5 )
 
 [node name="PersonTimer" type="Timer" parent="."]
 
+[node name="GlobalTimer" type="Timer" parent="."]
+
 [node name="Tween" type="Tween" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 6 )
+[node name="GameEnd" type="Node2D" parent="."]
+visible = false
+position = Vector2( 180, 329 )
+
+[node name="Rows" type="VBoxContainer" parent="GameEnd"]
+margin_left = -131.0
+margin_top = -198.0
+margin_right = 132.0
+margin_bottom = 249.0
+theme = ExtResource( 8 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="GameEnd/Rows"]
+margin_right = 263.0
+margin_bottom = 309.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.929412, 0.784314, 0.768627, 1 )
+custom_colors/font_outline_modulate = Color( 0.811765, 0.541176, 0.796078, 1 )
+text = "You scored 0000 points!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tweet" type="Button" parent="GameEnd/Rows"]
+margin_top = 329.0
+margin_right = 263.0
+margin_bottom = 378.0
+text = "Tweet"
+
+[node name="Menu" type="Button" parent="GameEnd/Rows"]
+margin_top = 398.0
+margin_right = 263.0
+margin_bottom = 447.0
+text = "Menu"

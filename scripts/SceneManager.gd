@@ -25,3 +25,14 @@ func start_game():
 		tween_duration, tween_curve, tween_ease)
 	$Tween.connect("tween_all_completed", play_scene, "begin", [], CONNECT_ONESHOT)
 	$Tween.start()
+
+func return_to_menu(other_scene):
+	var screen_y = get_viewport_rect().size.y
+	$Tween.interpolate_property($Menu, "position",
+		$Menu.get_position(), Vector2.ZERO,
+		tween_duration, tween_curve, tween_ease)
+	$Tween.interpolate_property(other_scene, "position",
+		other_scene.get_position(), other_scene.get_position() + Vector2(0.0, screen_y),
+		tween_duration, tween_curve, tween_ease)
+	$Tween.connect("tween_all_completed", other_scene, "queue_free", [], CONNECT_ONESHOT)
+	$Tween.start()
